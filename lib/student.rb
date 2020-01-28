@@ -21,7 +21,7 @@ class Student
 
   def save
     self.update; return if self.id
-    DB[:conn].execute("INSERT INTO students(name, grade) VALUES('#{self.name}','#{self.grade}')")
+    DB[:conn].execute("INSERT INTO students(name,grade) VALUES('#{self.name}','#{self.grade}')")
     @id = DB[:conn].execute('SELECT last_insert_rowid() FROM students')[0][0]
   end
 
@@ -39,7 +39,7 @@ class Student
   end
 
   def update
-    DB[:conn].execute("UPDATE students SET name='#{self.name}', grade='#{self.grade}' WHERE id='#{self.id}'")
+    DB[:conn].execute("UPDATE students SET name='#{self.name}',grade='#{self.grade}' WHERE id='#{self.id}'")
   end
 
 end
