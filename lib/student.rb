@@ -24,7 +24,7 @@ class Student
   def self.drop_table() DB[:conn].execute('DROP TABLE IF EXISTS students') end
 
   def save
-    self.update if self.id; return
+    if self.id then self.update; return
     DB[:conn].execute("INSERT INTO students(name, grade) VALUES('#{self.name}','#{self.grade}')")
     @id = DB[:conn].execute('SELECT last_insert_rowid() FROM students')[0][0]
   end
