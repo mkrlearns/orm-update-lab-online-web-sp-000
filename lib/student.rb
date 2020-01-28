@@ -37,6 +37,12 @@ class Student
 
   def self.new_from_db(row) self.new(row[0], row[1], row[2]) end
 
+  def self.find_by_name(name)
+    DB[:conn].execute("SELECT * FROM students WHERE name ='#{name}' LIMIT 1").map do |row|
+      self.new_from_db(row)
+    end.first
+  end
+
   def update
     DB[:conn].execute("UPDATE students SET name='#{self.name}', grade='#{self.grade}' WHERE id='#{self.id}'")
   end
